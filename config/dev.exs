@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :compass, Compass.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "compass_dev",
-  hostname: "localhost",
+  username: System.get_env("POSTGRES_USER") || "postgres",
+  password: System.get_env("POSTGRERS_PASSWORD") || "postgres",
+  hostname: System.get_env("POSTGRES_HOST") || "localhost",
+  database: System.get_env("POSTGRES_DB") || "compass_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
