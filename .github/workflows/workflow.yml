@@ -88,10 +88,36 @@ jobs:
           mix deps.get
           mix deps.compile
           yarn --cwd assets
-
+      - name: Check formatting
+        run: mix format --check-formatted
       - name: Run Tests
         run: mix test
         env:
           POSTGRES_USER: postgres
           POSTGRESS_PASSWORD: postgres
           POSTGRES_HOST: localhost
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        # actions/checkout@v2 only checks out the latest commit,
+        # so we need to tell it to check out the entire branch
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.1
+
+      - uses: mhanberg/gigalixir-action@0.4.3
+        with:
+          GIGALIXIR_USERNAME: ${{ secrets.GIGALIXIR_USERNAME }}
+          GIGALIXIR_PASSWORD: ${{ secrets.GIGALIXIR_PASSWORD }}
+          GIGALIXIR_APP: compass
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          MIGRATIONS: true
