@@ -20,3 +20,5 @@ config :compass, CompassWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :compass, Compass.Mailer, adapter: Bamboo.TestAdapter

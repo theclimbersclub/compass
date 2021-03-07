@@ -33,6 +33,7 @@ defmodule Compass.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bamboo, "~> 2.0.1"},
       {:ecto_sql, "~> 3.4"},
       {:floki, ">= 0.27.0", only: :test},
       {:gettext, "~> 0.11"},
