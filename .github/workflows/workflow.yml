@@ -12,8 +12,8 @@ jobs:
     name: "Run Tests"
     strategy:
       matrix:
-        elixir: ["1.10.3"]
-        otp: [22.2.7]
+        elixir: ["1.10.3", "1.11.3"]
+        otp: ["22.2.7", "23.2"]
     runs-on: ubuntu-latest
 
     services:
