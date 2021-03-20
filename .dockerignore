@@ -1,0 +1,8 @@
+_build
+deps
+assets/node_modules
+test
+*.iml
+erl_crash.dump
+*.ez
+priv/static
